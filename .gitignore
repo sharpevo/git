@@ -1,0 +1,34 @@
+# /TODO only ignore the root TODO file, not subdir/TODO
+# build/ ignore all files in the build directory
+
+# directories
+#backups/
+#ref/
+#output/
+
+# python things
+#*.pyc
+#__init__.py
+
+# emacs thinigs
+#*~
+#\#*\#
+
+# hidden files
+#.*
+
+# patch things
+#*.patch
+#*.diff
+#*.rej
+#*.orig
+
+# temporary files
+#tmp*
+
+# eric projet files
+#*.e4p
+#img/*
+
+# ignore all defalut.
+*

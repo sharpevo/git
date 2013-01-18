@@ -1,0 +1,61 @@
+[user]
+name = Ryan Woo
+email = seasideryan@gmail.com
+[core]
+excludesfile = /home/ryan/.gitignore
+editor = vim
+[log]
+decorate = full
+[diff]
+mnemonicprefix=true
+renames=copies
+    context=1
+[color]
+branch = auto
+diff = auto
+status = auto
+ui = True
+[color "branch"]
+current = white
+local = yellow
+remote = cyan
+[color "diff"]
+meta = blue #red
+frag = white #cyan
+old = magenta #blue
+new = cyan #yellow
+func = yellow #normal
+whitespace = blue
+commit = blue
+[color "status"]
+branch = yellow
+header = blue
+added = cyan
+changed = magenta
+untracked = blue
+[color "decorate"]
+#branch, remoteBranch, tag, stash or HEAD for local branches,
+#remote-tracking branches, tags, stash and HEAD, respectively.
+HEAD= yellow
+tag= magenta
+
+
+#
+# normal
+
+# yellow = brown  -> ? old in diff
+# blue = dark blue
+# magenta = pink -> modified
+# cyan = dark gren blue -> ready to commit
+# black = gray -> untracked
+## white = white
+## green = black
+## red = red
+
+[alias]
+lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(magenta)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+hist = "log --graph --full-history --pretty=format:'%C(white)%h%Creset %C(magenta)%ad %C(blue)<%an>%Creset%C(yellow)%d%Creset%n%n%B%Creset' --date=short --decorate=short --all"
+histfile = "log --graph --full-history --pretty=format:'%C(white)%h%Creset %C(magenta)%ad %C(blue)<%an>%Creset%C(yellow)%d%n%C(blue)%s%Creset' --date=short --decorate=short --all --abbrev-commit --stat"
+[merge]
+	ff = false
+	stat = true
