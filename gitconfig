@@ -1,61 +1,101 @@
 [user]
-name = Ryan Woo
-email = seasideryan@gmail.com
+    name = sharpevo
+    email = sharpevo@gmail.com
+
 [core]
-excludesfile = /home/ryan/.gitignore
-editor = vim
+    excludesfile = /etc/gitignore
+    editor = vim
+    
 [log]
-decorate = full
+    decorate = short # print full ref name
+
 [diff]
-mnemonicprefix=true
-renames=copies
-    context=1
+    mnemonicprefix=true # use meaningful prefix pair(i,w,c,o)
+    renames=copies # detect copies
+    context=1 # include one line of context
+[status]
+    showUntrackedFiles=no
 [color]
-branch = auto
-diff = auto
-status = auto
-ui = True
+    branch = auto
+    diff = auto
+    status = auto
+    ui = True
+    grep = auto
+
 [color "branch"]
-current = white
-local = yellow
-remote = cyan
+    current = white
+    local = yellow
+    remote = cyan
+
 [color "diff"]
-meta = blue #red
-frag = white #cyan
-old = magenta #blue
-new = cyan #yellow
-func = yellow #normal
-whitespace = blue
-commit = blue
+    meta = yellow 
+    frag = yellow
+    old = red
+    new = cyan
+    func = yellow
+    whitespace = cyan reverse
+    commit = blue
+
 [color "status"]
-branch = yellow
-header = blue
-added = cyan
-changed = magenta
-untracked = blue
+    branch = yellow
+    header = blue
+    added = cyan
+    changed = magenta
+    untracked = blue
+
 [color "decorate"]
-#branch, remoteBranch, tag, stash or HEAD for local branches,
-#remote-tracking branches, tags, stash and HEAD, respectively.
-HEAD= yellow
-tag= magenta
-
-
-#
-# normal
-
-# yellow = brown  -> ? old in diff
-# blue = dark blue
-# magenta = pink -> modified
-# cyan = dark gren blue -> ready to commit
-# black = gray -> untracked
-## white = white
-## green = black
-## red = red
+    HEAD= yellow
+    tag= magenta
 
 [alias]
-lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(magenta)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-hist = "log --graph --full-history --pretty=format:'%C(white)%h%Creset %C(magenta)%ad %C(blue)<%an>%Creset%C(yellow)%d%Creset%n%n%B%Creset' --date=short --decorate=short --all"
-histfile = "log --graph --full-history --pretty=format:'%C(white)%h%Creset %C(magenta)%ad %C(blue)<%an>%Creset%C(yellow)%d%n%C(blue)%s%Creset' --date=short --decorate=short --all --abbrev-commit --stat"
+    # standard commands
+    st = status -s # short format status
+    cm = commit -v # show diff in commit message template
+    br = branch
+    ck = checkout
+    df = diff
+    sl = stash list
+    sa = stash apply
+    sc = stash clear
+    ss = stash save
+    r = reset
+    r1 = reset HEAD^
+    rh = reset --hard
+    rh1 = reset --hard HEAD^
+    mg = merge
+
+    # personal commands
+    nb = !sh -c '[ "$#" = 1 ] && git checkout -b $1 develop' -
+    aa = add -u . # stages modified and deleted, without untracked.
+    ap = add --patch
+    ud = stash save --keep-index
+    rd = stash pop
+    dw = diff --color-words
+    # show a diff of last commit or a given commit
+    dc = !sh -c '[ "$#" = 1 ] && git diff $1^..$1 || git diff --cached ' -
+    # show changed files for the given commit 
+    lc = !sh -c 'git log --numstat $1^..$1' -
+    sb = !git branch | cut -c 3- | grep -v master | xargs git show-branch
+    sh = show
+    lf = ls-files
+    lr = rev-list --all --abbrev-commit
+    grep = grep -Ii
+    # search all revisions. the final dash makes arguments start with $1 not $0
+    ga = !sh -c 'git grep --line-number $1 $(git rev-list --all --abbrev-commit)' -
+    # history of current branch
+    lb = !git --no-pager log --decorate --abbrev-commit --oneline develop..
+    # short history
+    ll = log --graph --decorate --abbrev-commit --pretty=oneline
+    # history with time and author
+    lg = "log --graph --decorate --abbrev-commit --all --date=short --pretty=format:'%Cblue%h %C(cyan)%ad %Creset%s %C(yellow)%d'"
+    ln = "log --reverse --name-status --decorate --abbrev-commit --all --date=short"
+    who = shortlog -s --
+    # get list of aliases 
+    aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
+    # get commits started with given string to avoid collision occured by shortened hash.
+    abbr = "!sh -c 'git rev-list --all | grep ^$1 | while read commit; do git --no-pager log -n1 --pretty=format:\"%H %ci %an %s%n\" $commit; done' -"
 [merge]
-	ff = false
+	ff = false # create new commit when merge
 	stat = true
+[branch]
+    autosetuprebase=always
