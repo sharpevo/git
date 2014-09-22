@@ -7,28 +7,28 @@
 #output/
 
 # python things
-#*.pyc
+*.pyc
 #__init__.py
 
 # emacs thinigs
-#*~
-#\#*\#
+*~
+\#*\#
 
 # hidden files
-#.*
+.*
 
 # patch things
-#*.patch
-#*.diff
-#*.rej
-#*.orig
+*.patch
+*.diff
+*.rej
+*.orig
 
 # temporary files
-#tmp*
+tmp*
 
 # eric projet files
-#*.e4p
-#img/*
+*.e4p
+img/*
 
 # ignore all defalut.
-*
+#*
